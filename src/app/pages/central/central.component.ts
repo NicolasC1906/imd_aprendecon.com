@@ -6,10 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 
 
-interface Food {
-  value: string;
-  viewValue: string;
-} 
+
 
 
 @Component({
@@ -24,13 +21,6 @@ export class CentralComponent implements OnInit {
   dataBack:any = [];
 
 
-  foods: Food[] = [
-    {value: 'admin-0', viewValue: 'Admin'},
-    {value: 'steak-1', viewValue: 'Membresia 1'},
-    {value: 'pizza-2', viewValue: 'Membresia 2'},
-    {value: 'tacos-3', viewValue: 'Membresia 3'},
-  ];
-selectedFood: any;
   constructor(
     private ApiService: ApiService,
     private cookies:CookieService
