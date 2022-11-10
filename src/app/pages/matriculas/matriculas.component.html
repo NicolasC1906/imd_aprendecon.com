@@ -1,0 +1,201 @@
+
+<!-- Main Contents -->
+<div id="div_id7">
+
+    <div id="mainCoantiner">
+        <!--dust particel-->
+        <div class="margin-body">
+        
+        <div>
+          <div class="starsec"></div>
+          <div class="starthird"></div>
+          <div class="starfourth"></div>
+          <div class="starfifth"></div>
+        </div>
+        <!--Dust particle end---> 
+      
+        
+        
+        <div class="">
+          
+            <div class="container">
+                <div class="flex flex-col items-center lg:py-6 text-center">
+                    <h1 class="mt-2 mb-2.5 font-semibold text-2xl text-black lg:text-3xl"> Nuestras Membresías</h1>
+                    <p class="text-black "> 
+                        Nuestros planes son simples, comience a aprender hoy para convertirse en un experto en la especialidad elegida.</p>
+                    <ul class="bg-gray-100 font-medium inline-flex my-4 px-1.5 py-2.5 pricing-swicher rounded-md space-x-1 mt-6" 
+                    uk-switcher="connect: .change-plan ;animation: uk-animation-slide-top-medium, uk-animation-scale-up">
+                        <li class="uk-active"><a class="py-2 px-8 rounded-md whitespace-nowrap text-link" href="#">Mensual</a></li>
+                        <li class=""><a class="py-2 px-8 rounded-md whitespace-nowrap text-link relative" href="#">
+                            <span class="-right-4 -top-4 absolute border border-yellow-200 font-semibold hidden md:block px-1.5 py-0.5 rotate-3 rounded-full shadow-sm text-xs text-purple transform"> Sales</span> Anual</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+                 
+                <div class="grid lg:grid-cols-3 lg:mt-20 mt-4 lg:gap-y-0 gap-y-5">
+
+                    <!-- card-1 -->
+                    <div class="bg-white p-8 rounded-l-lg shadow space-y-2 price-card">
+    
+                        <h4 class="font-semibold text-lg sm:text-2xl text-purple-900"> {{plan1.nombre}} </h4>
+                        <p> Este plan está diseñado para aquellas personas que deseen iniciar por medio de un programa para principiantes.</p>
+    
+                        <div class="bg-gray-100 p-3 rounded space-x-1.5"> 
+                            <ul class="uk-switcher change-plan">
+                                <li class="flex items-end justify-center">
+                                    <div class="font-semibold text-3xl"> {{plan1.precio | currency: 'USD' : 'symbol' : '1.0-0'}}</div>
+                                    <div class="font-medium text-lg uk-animation-slide-left-small">/Mes </div>
+                                </li>
+                                <li class="flex items-end justify-center">
+                                    <div class="font-semibold text-3xl"> {{plan4.precio | currency: 'USD' : 'symbol' : '1.0-0'}}</div>
+                                    <div class="font-medium text-lg"> / Anual </div>
+                                </li>
+                            </ul>  
+                        </div>
+    
+                        <ul class="py-3 space-y-1 text-gray-500">
+                           
+                        <li> Acceso a Reels.</li>
+                        <li> Cursos Certificables.</li>
+                        <li> Clases en vivo.</li>
+                        <li> Laboratorios hasta el nivel basico.</li>
+                        <li> Foros y conversatorios en nuestra plataforma.</li>
+                        <li> Soporte sobre la plataforma.</li>
+                        <li> Acceso 24/7.</li>
+                        </ul>
+                        <ul class="uk-switcher change-plan">
+                            <li class="">
+                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Mensual </a>
+                            </li>
+                            <li class="">
+                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Anual </a>
+                            </li>
+                        </ul>  
+                        
+                    </div>
+                     
+                    <!-- card-2 -->
+                    <div class="bg-white pt-16 lg:pt-8 p-8 shadow-xl rounded-t-md  space-y-2 relative -my-3 rounded-b-md price-card"> 
+      
+                        <div class="lg:-top-10 top-0 absolute bg-purple left-0 p-3 rounded-t-md text-center text-white w-full font-semibold "> Recomendamos </div>
+    
+                        <h4 class="font-semibold text-lg sm:text-2xl text-purple-900"> {{plan3.nombre}} </h4>
+                        <p> Plan diseñado para aprender y practicar los entornos avanzados, diseñados a la especialidad elegida.</p>
+    
+                        <div class="bg-gray-100 p-3 rounded space-x-1.5"> 
+                            <ul class="uk-switcher change-plan">
+                                <li class="flex items-end justify-center">
+                                    <div class="font-semibold text-3xl"> {{plan3.precio | currency : 'USD' : 'symbol' : '1.0-0' }} </div>
+                                    <div class="font-medium text-lg uk-animation-slide-left-small">/Mes </div>
+                                </li>
+                                <li class="flex items-end justify-center">
+                                    <div class="font-semibold text-3xl"> {{plan6.precio | currency : 'USD' : 'symbol' : '1.0-0'}} </div>
+                                    <div class="font-medium text-lg"> / Anual </div>
+                                </li>
+                            </ul>  
+                        </div>
+    
+                        <ul class="py-3 space-y-1 text-gray-500">
+                            
+                            <li> Acceso a Reels.</li>
+                            <li> Cursos Certificables.</li>
+                            <li> Aprende ingles con contenido exclusivo.</li>
+                            <li> Clases en vivo.</li>
+                            <li> Curriculum en linea.</li>
+                            <li> Preparación tecnica.</li>
+                            <li> Asesoria tecnica para tus proyectos.</li>
+                            <li> pruebas tecnicas de entrevista.</li>
+                            <li> Laboratorios hasta el nivel avanzado</li>
+                            <li> Proyectos hasta el nivel avanzado.</li>
+                            <li> Obtención de insignias hasta el nivel avanzado.</li>
+                            <li> Foros y conversatorios en nuestra avanzado.</li>
+                            <li> Soporte sobre la plataforma.</li>
+                            <li> Acceso 24/7.</li>
+                        </ul>
+                        <br>
+                        
+                        <ul class="uk-switcher change-plan">
+                            <li class="">
+                                <a href="/billing" class="bg-purple block p-3 rounded-md space-x-1.5 text-center text-sm text-white text-link">Matricularme Mensual</a>
+                            </li>
+                            <li class="">
+                                <a href="/billing" class="bg-purple block p-3 rounded-md space-x-1.5 text-center text-sm text-white text-link">Matricularme Anual</a>
+                            </li>
+                        </ul>  
+                    </div>
+    
+                    <!-- card-3 -->
+                    <div class="bg-white p-8 rounded-r-lg shadow space-y-2 price-card">
+    
+    
+                        <h4 class="font-semibold text-lg sm:text-2xl text-purple-900"> {{plan2.nombre}}</h4>
+                        <p> Plan diseñado para aprender y practicar los entornos diseñados a la especialidad elegida.</p>
+    
+                        <div class="bg-gray-100 p-3 rounded space-x-1.5"> 
+                            <ul class="uk-switcher change-plan">
+                                <li class="flex items-end justify-center">
+                                    <div class="font-semibold text-3xl"> {{plan2.precio | currency: 'USD' : 'symbol' : '1.0-0'  }} </div>
+                                    <div class="font-medium text-lg uk-animation-slide-left-small">/Mes </div>
+                                </li>
+                                <li class="flex items-end justify-center">
+                                    <div class="font-semibold text-3xl"> {{plan5.precio | currency: 'USD' : 'symbol' : '1.0-0'}}</div>
+                                    <div class="font-medium text-lg"> / Anual </div>
+                                </li>
+                            </ul>  
+                        </div>
+    
+                        <ul class="py-3 space-y-1 text-gray-500">
+
+                            <li> Acceso a Reels.</li>
+                            <li> Cursos Certificables.</li>
+                            <li> Aprende ingles con contenido exclusivo.</li>
+                            <li> Clases en vivo.</li>
+                            <li> Laboratorios hasta el nivel medio.</li>
+                            <li> Proyectos hasta el nivel medio.</li>
+                            <li> Obtención de insignias hasta el nivel medio.</li>
+                            <li> Foros y conversatorios en nuestra plataforma.</li>
+                            <li> Soporte sobre la plataforma.</li>
+                            <li> Acceso 24/7.</li>
+
+                        </ul>
+                        <ul class="uk-switcher change-plan">
+                            <li class="">
+                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Mensual </a>
+                            </li>
+                            <li class="">
+                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Anual </a>
+                            </li>
+                        </ul>  
+                    </div>
+
+                </div>
+
+                <div class="my-20">
+                    
+                    <div class="lg:text-center my-2">
+                        <div class=""> Faq </div>
+                        <div class="mb-6 font-semibold lg:text-2xl  text-lg "> Preguntas Frecuentes de nuestras menbresías :</div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-5" *ngFor="let pregunta of getFaq">
+
+                        <div> 
+                            <div class="text-lg font-medium mb-2 "> {{pregunta.pregunta}}</div>
+                            <div class="">{{pregunta.respuesta}} </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+
+            </div>
+          
+        </div>
+      
+       </div>
+      </div>
+
+
+</div>

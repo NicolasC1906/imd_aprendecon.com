@@ -1,0 +1,74 @@
+.bg-purple {
+    background: #5624d0;
+  }
+  
+  
+  .margin-btn {
+    margin-right: 10px;
+  }
+
+  .large-btn {
+    width: 100%; 
+  }
+
+  .text-link{
+    text-decoration:none !important;
+  }
+
+  .live{
+    position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  padding: 0.13rem 0.5rem;
+  border-radius: 3rem;
+  color: #ffffff;
+    background-color: red;
+  }
+
+  .parpadea {
+  
+    animation-name: parpadeo;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  
+    -webkit-animation-name:parpadeo;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+  }
+  
+  @-moz-keyframes parpadeo{  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  @-webkit-keyframes parpadeo {  
+    0% { opacity: 1.0; }
+    /* 50% { opacity: 0.0; } */
+     100% { opacity: 1.0; }
+  }
+  
+  @keyframes parpadeo {  
+    0% { opacity: 1.0; }
+     50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+
+.imgCat {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.logout{
+  
+  background-color: red;
+}
+

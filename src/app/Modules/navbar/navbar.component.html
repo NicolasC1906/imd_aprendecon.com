@@ -1,0 +1,209 @@
+
+<div id="wrapper" class="is-verticle">
+
+  <!--  Header  -->
+ <header uk-sticky> 
+  <div class="header_inner">
+      <div class="left-side">
+
+          <!-- Logo -->
+          <div id="logo">
+              <a href="/">
+                  <img src="../assets/images/logo.png" alt="">
+                  <img src="../assets/images/logo.png" class="logo_inverse" alt="">
+                  <img src="../assets/images/logo.png" class="logo_mobile" alt="">
+              </a>
+          </div>
+          
+
+          <!-- icon menu for mobile -->
+          <div class="triger" uk-toggle="target: #wrapper ; cls: is-active">
+          </div>
+
+      </div>
+      <div class="right-side">
+        
+
+          <!-- Header search box  -->
+          <div class="header_search"><i class="uil-search-alt"></i> 
+              <input value="" type="text" class="form-control" placeholder=" Búsqueda rápida de cualquier cosa..." autocomplete="off">
+              <div uk-drop="mode: click;offset:10" class="header_search_dropdown">
+                     
+                  <h4 class="search_title"> Lo más Buscado </h4>
+                  <ul>
+                      <li> 
+                          <a href="#">  
+                              <img src="../assets/images/logo.png" alt="" class="list-avatar">
+                              <div class="list-name"> Categorias Nombre</div>
+                          </a> 
+                      </li> 
+                  </ul>
+
+              </div>
+          </div>
+
+          <div>
+
+           
+               <!-- profile -->
+               <button *ngIf="userLogout" mat-raised-button class="margin-btn"  routerLink="/login" >Inicia Sesión</button>
+               <button  *ngIf="userLogout" mat-raised-button class="bg-purple text-white"  routerLink="/registro">Registro</button>
+               <a *ngIf="userFree" mat-raised-button class=" bg-purple text-white"  href="#div_id7" >Adquirir una membresía</a>
+
+              <div *ngIf="userToken">
+               <a href="">
+                  <img src="../assets/images/avatars/placeholder.png" class="header_widgets_avatar" alt="">
+              </a>
+              <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
+                  <ul>   
+                      <li>
+                          <a href="#" class="user">
+                              <div class="user_avatar">
+                                  <img src="https://cdn-icons-png.flaticon.com/512/320/320368.png" alt="">
+                              </div>
+                              <div class="user_name">
+                                  <div> {{nombre}} {{apellido}} </div>
+                                  <span> {{username}} </span>
+                                  <span> Membresía: <strong>{{rolName}}</strong> </span>
+                                  <span> Especialidad: {{id_especialidad}} </span>
+                                  
+               
+                              </div>
+                          </a>
+                      </li>
+                      <li> 
+                          <hr>
+                      </li>
+                      <!-- <li> 
+                          <a href="#" class="is-link">
+                            
+                          </a>
+                      </li>  -->
+                      <li> 
+                          <hr>
+                      </li>
+                      <li> 
+                          <a href="#">
+                             
+                               Mi Cuenta
+                          </a>
+                      </li>
+                      <!-- <li> 
+                          <a href="#">
+                              
+                              Subscriptions
+                          </a>
+                      </li>
+                      <li> 
+                          <a href="#">
+                              
+                              My Billing 
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              
+                              Account Settings  
+                          </a>
+                      </li> -->
+                      <li> 
+                          <hr>
+                      </li>
+                      <!-- <li> 
+                          <a href="#" id="night-mode" class="btn-night-mode" onclick="UIkit.notification({ message: 'Hmm...  <strong> Night mode </strong> feature is not available yet. ' , pos: 'bottom-right'  })">
+                              
+                               Night mode
+                              <span class="btn-night-mode-switch">
+                                  <span class="uk-switch-button"></span>
+                              </span>
+                          </a>
+                      </li> -->
+                      <li > 
+                          <a class="" (click)="logout()">
+                             
+                            
+                            <i name="card-outline" class="side-icon text-link "><span class="icon-material-outline-help-outline"> </span></i> Cerrar sesión 
+                          </a>
+                      </li>
+                  </ul>
+              </div> 
+            </div>
+          </div>
+
+      </div>
+  </div>
+</header>
+
+ 
+  <!-- Main Contenido -->
+  <div class="main_content">
+    
+  </div> 
+  
+  <!-- sidebar -->
+  <div class="sidebar">
+      <div class="sidebar_inner" data-simplebar>
+          
+          <ul class="side-colored">
+              <li class=""><a href="#div_id2" class="text-link">
+                      <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fhogar.png?alt=media&token=b4da4a56-f8e5-4bab-975b-3dfc15446055" alt="">
+                      <span> Cursos</span>
+                  </a>
+              </li>
+              <li><a href="#div_id3" class="text-link">
+                <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fconstruccion.png?alt=media&token=acad3a55-08ab-4dd4-bfd3-6ce1e8042329" alt="">
+
+                      <span> Proyectos</span> 
+                  </a>
+              </li>
+              <li><a href="#div_id4" class="text-link">
+                <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fmicrofono.png?alt=media&token=6918b1ce-a2b1-4c55-924e-13ac3b9033be" alt="">
+                      <span> Live-TV</span><span class="live parpadea">REC</span> 
+                  </a>
+              </li>
+              <li><a href="#div_id5" class="text-link">
+                <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Frealidad-aumentada.png?alt=media&token=a4d56c68-d218-451d-aa77-154d05a54a3d" alt="">
+                      <span> Reels</span> 
+                  </a>
+              </li>
+              <li><a href="#div_id6" class="text-link">
+                <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fplanting.png?alt=media&token=03ef64e0-44cf-4049-a163-0846ffba34e5" alt="">
+                      <span> Laboratorios</span><span class="soon">Nuevo</span> 
+                  </a>
+              </li>
+              <li><a href="#div_id7" class="text-link">
+                <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fdiamond%20(2).png?alt=media&token=d5494104-4882-4d0a-8fa2-6b10f33c9fbd" alt="">
+                      <span> Matriculas</span>
+                  </a>
+              </li>
+          </ul>
+          
+
+          <ul class="side_links" data-sub-title="Páginas de interés">
+              <li><a href="/faq" class="text-link"> <i name="card-outline" class="side-icon text-link"><span class="icon-material-outline-help-outline"> </span></i>FAQ </a></li>
+              <li><a href="/soporte" class="text-link"> <i name="information-circle-outline" class="side-icon text-link"><span class="icon-material-outline-feedback"></span></i>Soporte</a></li>
+              <li><a href="/terminos-condiciones" class="text-link"> <i name="chatbubble-ellipses-outline" class="side-icon"><span class="icon-material-outline-gavel"></span></i>Terminos & Condiciones</a></li>
+              <li><a href="/TratamiendoDatos" class="text-link"> <i name="receipt-outline" class="side-icon"><span class="icon-material-outline-face"></span></i>Tratamiendo Datos</a></li>
+              <li><a href="/PoliticasPrivacidad" class="text-link"> <i name="reader-outline" class="side-icon"><span class="icon-material-outline-supervisor-account"></span></i>Políticas Privacidad</a></li>
+          </ul>
+          
+          <button  routerLink="/central"  *ngIf="userToken" mat-raised-button class="bg-purple large-btn text-white"><span class="icon-feather-cpu text-white"> </span> Ir a la central</button>
+          <!-- <div class="side_foot_links">
+              <a href="#">About</a>
+              <a href="#">Blog </a>
+              <a href="#">Careers</a>
+              <a href="#">Support</a>
+              <a href="#">Contact Us </a>
+              <a href="#">Developer</a>
+              <a href="#">Terms of service</a>
+          </div> -->
+
+      </div>
+      
+
+      <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
+      
+  </div>
+  
+</div>
+

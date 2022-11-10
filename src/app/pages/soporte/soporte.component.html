@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+<!-- Main Contents -->
+<div class="main_content">
+            
+    <div class="lg:pt-16" style="background: #5624d0;">
+
+        <div class="container m-auto px-4">
+            
+            <div class="flex flex-col justify-center items-center md:p-7 text-white">
+                
+                <div class="lg:text-4xl text-2xl font-semibold mb-6"> Como te podemos ayudar? </div>
+
+                <!-- <div class="bg-white mb-3 relative rounded-md lg:w-2/3 w-full shadow-md" id="search">
+                 <input placeholder="Buscar en preguntas frecuentes" class="focus:outline-none h-12 pl-10 rounded-lg w-full">
+                </div> -->
+        <span>Si tienes dudas puedes tambien visitar nuestra pagina</span> <a class="text-white" href="/faq">Preguntas frecuentes</a>
+         </div>
+       
+        </div>
+
+        <div class="-mt-2 lg:block hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 220" class="text-white fill-current">
+              <path d="M918.34,99.41C388.23,343.6,47.11,117.12,0,87.54V220H1600V87.54C1378.72-76.71,1077.32,27.41,918.34,99.41Z">
+              </path>
+            </svg>
+        </div>
+       
+
+    </div>
+    <div class="container">
+
+        <div class="max-w-3xl mt-lg-11 mx-auto lg:p-10 p-5 tube-card">
+
+            <div class="text-center mt-4 mb-6 lg:mt-10">
+                <h1 class="font-semibold md:text-3xl text-xl text-center uk-heading-line"><span>Formulario de Soporte</span></h1>
+            </div>
+            <div class="container-form-soport">
+                <form class="example-form">
+                    <mat-form-field hintLabel="Max 100 caracteres" class="example-form" appearance="outline" >
+                        <mat-label>Nombre Completo</mat-label>
+                        <input matInput #input maxlength="100" placeholder="Ejemplo: Pepito Perez" type="name" [formControl]="nombre" required>
+                        <!-- <mat-hint align="end">{{input.value?.length || 0}}/100</mat-hint> -->
+                      </mat-form-field>
+                  
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Correo Electronico</mat-label>
+                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> 
+                      </mat-form-field>
+                    
+                      <mat-form-field hintLabel="Max 50 caracteres" class="example-form" appearance="outline">
+                        <mat-label>Motivo</mat-label>
+                        <input matInput #input maxlength="50" placeholder="Ejemplo: Problema Registro" [formControl]="motivo" required>
+                        <!-- <mat-hint align="end">{{input.value?.length || 0}}/50</mat-hint> -->
+                      </mat-form-field>
+    
+                      <mat-form-field hintLabel="Max 150 caracteres" class="example-form" appearance="outline">
+                        <mat-label>Mensaje</mat-label>
+                        <textarea matInput maxlength="150" [formControl]="mensaje" required></textarea>
+                        <!-- <mat-hint align="end">{{input.value?.length || 0}}/150</mat-hint> -->
+                      </mat-form-field>
+
+                      
+
+                      
+                      
+                      <button mat-raised-button color="primary" type="submit">Enviar a soporte</button>
+
+                  </form>
+                </div>
+
+
+
+        </div>
+        
+
+    </div>
+</div>
+
+
+
+<app-footer></app-footer>
