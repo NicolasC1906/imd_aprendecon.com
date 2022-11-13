@@ -24,13 +24,16 @@ import { LoginComponent } from './Modules/auth/login/login.component';
 import { RegistroComponent } from './Modules/auth/registro/registro.component';
 import { RestablecerComponent } from './Modules/auth/restablecer/restablecer.component';
 import { CentralComponent } from './pages/central/central.component';
-import { BillingComponent } from './pages/payment/billing/billing.component';
+import { BillingComponent } from './pages/payment/billing/billing.component'; 
 
 
 
 const routes: Routes = [
   
   {path: '', component: HomeComponent},
+
+ 
+
   {path: 'faq', component: FAQComponent},
   {path: 'soporte', component: SoporteComponent},
   {path: 'terminos-condiciones', component:TerminosCondicionesComponent},

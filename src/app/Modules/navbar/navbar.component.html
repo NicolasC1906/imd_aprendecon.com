@@ -145,6 +145,7 @@
       <div class="sidebar_inner" data-simplebar>
           
           <ul class="side-colored">
+            
               <li class=""><a href="#div_id2" class="text-link">
                       <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fhogar.png?alt=media&token=b4da4a56-f8e5-4bab-975b-3dfc15446055" alt="">
                       <span> Cursos</span>
@@ -171,7 +172,7 @@
                       <span> Laboratorios</span><span class="soon">Nuevo</span> 
                   </a>
               </li>
-              <li><a href="#div_id7" class="text-link">
+              <li><a href="#div_id7" class="text-link is-active">
                 <img class="imgCat" src="https://firebasestorage.googleapis.com/v0/b/lamejorferia-32065.appspot.com/o/img%2Fdiamond%20(2).png?alt=media&token=d5494104-4882-4d0a-8fa2-6b10f33c9fbd" alt="">
                       <span> Matriculas</span>
                   </a>
@@ -180,11 +181,11 @@
           
 
           <ul class="side_links" data-sub-title="Páginas de interés">
-              <li><a href="/faq" class="text-link"> <i name="card-outline" class="side-icon text-link"><span class="icon-material-outline-help-outline"> </span></i>FAQ </a></li>
-              <li><a href="/soporte" class="text-link"> <i name="information-circle-outline" class="side-icon text-link"><span class="icon-material-outline-feedback"></span></i>Soporte</a></li>
-              <li><a href="/terminos-condiciones" class="text-link"> <i name="chatbubble-ellipses-outline" class="side-icon"><span class="icon-material-outline-gavel"></span></i>Terminos & Condiciones</a></li>
-              <li><a href="/TratamiendoDatos" class="text-link"> <i name="receipt-outline" class="side-icon"><span class="icon-material-outline-face"></span></i>Tratamiendo Datos</a></li>
-              <li><a href="/PoliticasPrivacidad" class="text-link"> <i name="reader-outline" class="side-icon"><span class="icon-material-outline-supervisor-account"></span></i>Políticas Privacidad</a></li>
+              <li routerLinkActive="active"><a routerLink="/faq" class="text-link "> <i name="card-outline" class="side-icon text-link"><span class="icon-material-outline-help-outline"> </span></i>FAQ </a></li>
+              <li routerLinkActive="active"><a routerLink="/soporte"   class="text-link"> <i name="information-circle-outline" class="side-icon text-link"><span class="icon-material-outline-feedback"></span></i>Soporte</a></li>
+              <li routerLinkActive="active"><a routerLink="/terminos-condiciones"  class="text-link"> <i name="chatbubble-ellipses-outline" class="side-icon"><span class="icon-material-outline-gavel"></span></i>Terminos & Condiciones</a></li>
+              <li routerLinkActive="active"><a routerLink="/TratamiendoDatos"  class="text-link"> <i name="receipt-outline" class="side-icon"><span class="icon-material-outline-face"></span></i>Tratamiendo Datos</a></li>
+              <li routerLinkActive="active"><a routerLink="/PoliticasPrivacidad"   class="text-link"> <i name="reader-outline" class="side-icon"><span class="icon-material-outline-supervisor-account"></span></i>Políticas Privacidad</a></li>
           </ul>
           
           <button  routerLink="/central"  *ngIf="userToken" mat-raised-button class="bg-purple large-btn text-white"><span class="icon-feather-cpu text-white"> </span> Ir a la central</button>

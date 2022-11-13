@@ -10,6 +10,7 @@ import { ApiService } from '../../../services/api.service';
 export class FooterComponent implements OnInit {
 
   subscriptions:Subscription[]=[];
+  anio: number = new Date().getFullYear();
   
   constructor(private ApiService: ApiService,) { }
   

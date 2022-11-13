@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+
 // Inicio Service JavaScript
 import { JavascriptService } from './javascript.service';
 // Final Service JavaScript
@@ -86,7 +87,6 @@ import { RegistroComponent } from './Modules/auth/registro/registro.component';
 import { RestablecerComponent } from './Modules/auth/restablecer/restablecer.component';
 import { CentralComponent } from './pages/central/central.component';
 import { BillingComponent } from './pages/payment/billing/billing.component';
-import { PaymentsComponent } from './pages/payment/payments/payments.component';
 
 
 @NgModule({
@@ -114,7 +114,6 @@ import { PaymentsComponent } from './pages/payment/payments/payments.component';
     RestablecerComponent,
     CentralComponent,
     BillingComponent,
-    PaymentsComponent
   ],
   imports: [
     HttpClientModule,
@@ -176,6 +175,7 @@ import { PaymentsComponent } from './pages/payment/payments/payments.component';
   ],
   providers: [HttpClient, {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterseptor, multi: true}, JavascriptService, CookieService],
   bootstrap: [AppComponent],
-  exports: [LoadingComponent]
+  exports: [LoadingComponent],
+  
 })
 export class AppModule { }

@@ -72,7 +72,9 @@ this.userVerification()
         icon: 'error',
         title: 'Oops...',
         text: 'No has iniciado sesión en Aprendecon!',
-        confirmButtonText: 'iniciar Sesion!',
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
         backdrop: `
         #5624d0
           url("https://sweetalert2.github.io/images/nyan-cat.gif")
@@ -80,12 +82,9 @@ this.userVerification()
           no-repeat
         `
         
-      }).then((result) => {
-        if (result.isConfirmed) {
-  
-          window.location.href = '/login'
-        }
-      });
+      }).then((timer) => {
+         window.location.href = '/login'
+      })
     }
   }
   

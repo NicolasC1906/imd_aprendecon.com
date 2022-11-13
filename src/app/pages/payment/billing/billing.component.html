@@ -1,43 +1,81 @@
 <app-navbar></app-navbar>
 <div class="main_content">
-    <div class="container">
-
+  <div class="container">
+		<div class="left">
+			<div class="info-box">
+				<div class="receipt">
+					Matricula <span>Mensual/Anual</span>
+				</div>
+				<div class="entry">
+					<i class="icon-wallet" aria-hidden="true"></i>
+					<p>Monto:<span> $20.000 COP</span></p>
+				</div>
+				<div class="entry">
+					<i class="icon-calendar" aria-hidden="true"></i>
+					<p>Fecha:<span> {{date}}/{{mount}}/{{anio}} </span></p>
+				</div>
+				<div class="entry">
+					<i class="icon-star" aria-hidden="true"></i>
+					<p>Membresía:<span> Medium</span></p>
+				</div>
+				<div class="entry">
+					<i class="icon-notebook" aria-hidden="true"></i>
+					<p>Confirmación #:<span> 0YX123580219G</span></p>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="content">
+				<div class="header">
+					<img src="../assets/images/LogoPay.png">
+					<h4>{{date}}/{{mount}}/{{anio}} {{hour}}:{{minute}}:{{seconds}}</h4>
+				</div>
+				<div class="main">
           
+					<h3> Membresía Medium (Mensual)/(1 Año)</h3>
+					<h5>Total: $20.000 COP</h5>
+				</div>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nombre (No Editable)</mat-label>
+            <input matInput disabled value="Nicolas Giovanny">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Apellido (No Editable)</mat-label>
+            <input matInput disabled value="Ceron Alfonso">
+          </mat-form-field></td>
+        </tr></table>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Username (No Editable)</mat-label>
+          <input matInput disabled value="nicolas.gmail15651">
+        </mat-form-field>
+
         
+        
+				<div class="message">
           
-          <mat-stepper linear #stepper>
-            <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-              <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Paso 1</ng-template>
-                <mat-form-field appearance="fill">
-                  <mat-label>Nombre</mat-label>
-                  <input matInput formControlName="firstCtrl" placeholder="Nombre y Apellido" required>
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperNext>Siguiente</button>
-                </div>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-              <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Paso 2</ng-template>
-                <mat-form-field appearance="fill">
-                  <mat-label>Dirección</mat-label>
-                  <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                         required>
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperPrevious>Regresar</button>
-                  <button mat-button matStepperNext>Siguiente</button>
-                </div>
-              </form>
-            </mat-step>
-            
-          </mat-stepper>
-          
+					<p>Hola, Username confirmando este proceso pagaras $20.000 COP, concepto Membresía Medium. Comprobante de pago sera enviado a(<a href="mailto:paypal@dribbble.com">mail@mail.com</a>)</p>
+					<h6>Recomendamos revisar nuestros terminos & condiciones. Esta transacción puede tardar unos minutos.</h6>
+				</div>
 
-    </div>
-
+        
+				<div class="footer">
+          <div class="header">
+            <img src="https://www.openpay.co/_nuxt/img/openpay-color.77b290c.png">
+            <img src="https://cms.areandina.edu.co/sites/default/files/2021-10/logos-tarjetas-credito-financiero-areandina-2021.png">
+          </div>
+					<a href="#"></a>
+					<h6>Comprobante ID: 108165</h6>
+				</div>
+			</div>
+		</div>
+    
+	</div>
+  
+  
 
 </div>
+
 <app-footer></app-footer>
