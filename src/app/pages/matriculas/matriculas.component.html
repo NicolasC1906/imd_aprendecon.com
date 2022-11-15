@@ -38,7 +38,7 @@
                     <!-- card-1 -->
                     <div class="bg-white p-8 rounded-l-lg shadow space-y-2 price-card">
     
-                        <h4 class="font-semibold text-lg sm:text-2xl text-purple-900"> {{plan1.nombre}} </h4>
+                        <h4 class="font-semibold text-lg sm:text-2xl text-purple-900">  {{plan1.nombre}} </h4>
                         <p> Este plan está diseñado para aquellas personas que deseen iniciar por medio de un programa para principiantes.</p>
     
                         <div class="bg-gray-100 p-3 rounded space-x-1.5"> 
@@ -66,10 +66,10 @@
                         </ul>
                         <ul class="uk-switcher change-plan">
                             <li class="">
-                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Mensual </a>
+                                <a [routerLink]="['/billing',plan1.id_suscripcion]"  class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Mensual </a>
                             </li>
                             <li class="">
-                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Anual </a>
+                                <a  [routerLink]="['/billing',plan4.id_suscripcion]" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Anual </a>
                             </li>
                         </ul>  
                         
@@ -117,10 +117,10 @@
                         
                         <ul class="uk-switcher change-plan">
                             <li class="">
-                                <a href="/billing" class="bg-purple block p-3 rounded-md space-x-1.5 text-center text-sm text-white text-link">Matricularme Mensual</a>
+                                <a  [routerLink]="['/billing',plan3.id_suscripcion]"class="bg-purple block p-3 rounded-md space-x-1.5 text-center text-sm text-white text-link">Matricularme Mensual</a>
                             </li>
                             <li class="">
-                                <a href="/billing" class="bg-purple block p-3 rounded-md space-x-1.5 text-center text-sm text-white text-link">Matricularme Anual</a>
+                                <a  [routerLink]="['/billing',plan6.id_suscripcion]" class="bg-purple block p-3 rounded-md space-x-1.5 text-center text-sm text-white text-link">Matricularme Anual</a>
                             </li>
                         </ul>  
                     </div>
@@ -161,10 +161,10 @@
                         </ul>
                         <ul class="uk-switcher change-plan">
                             <li class="">
-                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Mensual </a>
+                                <a  [routerLink]="['/billing',plan2.id_suscripcion]" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Mensual </a>
                             </li>
                             <li class="">
-                                <a href="/billing" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Anual </a>
+                                <a  [routerLink]="['/billing',plan5.id_suscripcion]" class="block border p-3 rounded-md space-x-1.5 text-center text-purple-900 text-sm text-link" >Matricularme Anual </a>
                             </li>
                         </ul>  
                     </div>

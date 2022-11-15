@@ -1,76 +1,190 @@
 <app-navbar></app-navbar>
 <div class="main_content">
   <div class="container">
-		<div class="left">
-			<div class="info-box">
-				<div class="receipt">
-					Matricula <span>Mensual/Anual</span>
-				</div>
-				<div class="entry">
-					<i class="icon-wallet" aria-hidden="true"></i>
-					<p>Monto:<span> $20.000 COP</span></p>
-				</div>
-				<div class="entry">
-					<i class="icon-calendar" aria-hidden="true"></i>
-					<p>Fecha:<span> {{date}}/{{mount}}/{{anio}} </span></p>
-				</div>
-				<div class="entry">
-					<i class="icon-star" aria-hidden="true"></i>
-					<p>Membresía:<span> Medium</span></p>
-				</div>
-				<div class="entry">
-					<i class="icon-notebook" aria-hidden="true"></i>
-					<p>Confirmación #:<span> 0YX123580219G</span></p>
-				</div>
-			</div>
-		</div>
-		<div class="right">
-			<div class="content">
-				<div class="header">
-					<img src="../assets/images/LogoPay.png">
-					<h4>{{date}}/{{mount}}/{{anio}} {{hour}}:{{minute}}:{{seconds}}</h4>
-				</div>
-				<div class="main">
-          
-					<h3> Membresía Medium (Mensual)/(1 Año)</h3>
-					<h5>Total: $20.000 COP</h5>
-				</div>
-
-        <table class="example-full-width" cellspacing="0"><tr>
-          <td><mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Nombre (No Editable)</mat-label>
-            <input matInput disabled value="Nicolas Giovanny">
-          </mat-form-field></td>
-          <td><mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Apellido (No Editable)</mat-label>
-            <input matInput disabled value="Ceron Alfonso">
-          </mat-form-field></td>
-        </tr></table>
-
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Username (No Editable)</mat-label>
-          <input matInput disabled value="nicolas.gmail15651">
-        </mat-form-field>
-
-        
-        
-				<div class="message">
-          
-					<p>Hola, Username confirmando este proceso pagaras $20.000 COP, concepto Membresía Medium. Comprobante de pago sera enviado a(<a href="mailto:paypal@dribbble.com">mail@mail.com</a>)</p>
-					<h6>Recomendamos revisar nuestros terminos & condiciones. Esta transacción puede tardar unos minutos.</h6>
-				</div>
-
-        
-				<div class="footer">
-          <div class="header">
-            <img src="https://www.openpay.co/_nuxt/img/openpay-color.77b290c.png">
-            <img src="https://cms.areandina.edu.co/sites/default/files/2021-10/logos-tarjetas-credito-financiero-areandina-2021.png">
-          </div>
-					<a href="#"></a>
-					<h6>Comprobante ID: 108165</h6>
+	
+	
+	  <mat-stepper [linear]="isLinear" #stepper>
+		<mat-step label="Información" [stepControl]="firstFormGroup">
+			<div class="left">
+				<div class="info-box">
+					<div class="receipt">
+						Matricula <span>{{plan.tipo}}</span>
+					</div>
+					<div class="entry">
+						<i class="icon-wallet" aria-hidden="true"></i>
+						<p>Monto: <span> {{plan.precio | currency: 'USD' : 'symbol' : '1.0-0'  }}</span></p>
+					</div>
+					<div class="entry">
+						<i class="icon-calendar" aria-hidden="true"></i>
+						<p>Fecha:<span> {{getTimeLoaded(1) | date:'shortDate'}} </span></p>
+					</div>
+					<div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Membresía:<span> {{plan.nombre}}</span></p>
+					</div>
+					<!-- <div class="entry">
+						<i class="icon-notebook" aria-hidden="true"></i>
+						<p>Confirmación #:<span> 0YX123580219G</span></p>
+					</div> -->
 				</div>
 			</div>
-		</div>
+			<div class="right">
+				<div class="content">
+					<div class="header">
+						<img src="../assets/images/LogoPay.png">
+						<h4>{{getTimeLoaded(1) | date:'medium'}}</h4>
+					</div>
+					<div class="main">
+			  
+						<h3> {{plan.nombre}}</h3>
+						<h5>Total: {{plan.precio | currency: 'USD' : 'symbol' : '1.0-0'  }} COP</h5>
+					</div>
+	
+			
+	
+			<mat-form-field class="example-full-width" appearance="fill">
+			  <mat-label>Nombres</mat-label>
+			  <input matInput disabled value="{{nombreUser}}">
+			</mat-form-field>
+			<mat-form-field class="example-full-width" appearance="fill">
+				<mat-label>Apellidos</mat-label>
+				<input matInput disabled value="{{apellido}}">
+			  </mat-form-field>
+	
+			
+			
+					<div class="message">
+			  
+						<p>Hola, {{username}} confirmando este proceso pagaras {{plan.precio | currency: 'USD' : 'symbol' : '1.0-0'  }} COP, concepto Membresía Medium. Comprobante de pago sera enviado a (<a href="mailto:{{correoUser}}">{{correoUser}}</a>)</p>
+						<h6>Recomendamos revisar nuestros terminos & condiciones. Esta transacción puede tardar unos minutos.</h6>
+					</div>
+					  
+			
+					<div class="footer">
+			  <div class="header">
+				<img src="https://www.openpay.co/_nuxt/img/openpay-color.77b290c.png">
+				<img src="https://cms.areandina.edu.co/sites/default/files/2021-10/logos-tarjetas-credito-financiero-areandina-2021.png">
+			  </div>
+						<a href="#"></a>
+						<h6>Comprobante ID: {{date}}{{mount}}{{anio}}123</h6>
+					</div>
+				</div>
+			</div>
+			<button mat-button mat-raised-button class="bg-purple" color="primary" matStepperNext>Continuar</button>
+			Contenido 1 - cargado: {{getTimeLoaded(1) | date:'medium'}}
+		</mat-step>
+		<mat-step  label="Pago">
+			<div class="left">
+				<div class="info-box">
+					<div class="receipt">
+						Matricula <span>{{plan.tipo}}</span>
+					</div>
+					<div class="entry">
+						<i class="icon-wallet" aria-hidden="true"></i>
+						<p>Monto: <span>{{plan.precio | currency: 'USD' : 'symbol' : '1.0-0'  }}</span></p>
+					</div>
+					<div class="entry">
+						<i class="icon-calendar" aria-hidden="true"></i>
+						<p>Fecha:<span> {{getTimeLoaded(1) | date:'shortDate'}} </span></p>
+					</div>
+					<div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Membresía:<span> {{plan.nombre}}</span></p>
+					</div>
+					<!-- <div class="entry">
+						<i class="icon-notebook" aria-hidden="true"></i>
+						<p>Confirmación #:<span> 0YX123580219G</span></p>
+					</div> -->
+				</div>
+			</div>
+			<div class="right">
+				<div class="content">
+					<div class="header">
+						<img src="../assets/images/LogoPay.png">
+						<h4>{{date}}/{{getTimeLoaded(1) | date:'medium'}}</h4>
+					</div>
+					<div class="main">
+			  
+						<h3>Datos de Pago</h3>
+						<h5> {{plan.nombre}} Total: {{plan.precio | currency: 'USD' : 'symbol' : '1.0-0'  }} COP</h5>
+					</div>
+	
+					<form >
+						<mat-form-field class="example-full-width" appearance="outline">
+						  <mat-label>Nombre del titular</mat-label>
+						  <input matInput placeholder="Ex. Pepe Perez" [formControl]="nombre" required>
+						  <mat-error *ngIf="nombre.errors">{{getErrorMessagenombre()}}</mat-error>
+						</mat-form-field>
+						<mat-form-field class="example-full-width" appearance="outline">
+							<mat-label>Numero Tarjeta</mat-label>
+							<input matInput type="tel" #numeroTarjeta minlength="16" maxlength="20" placeholder="Ex. 5254133674403564" [formControl]="numerotarjeta" required>
+							<mat-hint align="end">{{numeroTarjeta.value.length}} / 19</mat-hint>
+							<mat-error *ngIf="numerotarjeta.errors">{{getErrorMessagenumerotarjeta()}}</mat-error> 
+							
+						</mat-form-field>
+						 
+						<table class="example-full-width-table" cellspacing="0"><tr>
+							<td>
+								<mat-form-field class="width-table" appearance="outline">
+									<mat-label>Mes</mat-label>
+									<input matInput #mesTarjeta maxlength="2" maxlength="2" type="number" minlength="2" placeholder="Ex. {{mount}}" [formControl]="mestarjeta" required>
+									<mat-hint align="end">{{mesTarjeta.value.length}} / 2</mat-hint>
+									<mat-error *ngIf="mestarjeta.errors">{{getErrorMessagenMesTarjeta()}}</mat-error>
+									
+								  </mat-form-field> </td>
+								  
+							<td> 
+								<mat-form-field class="width-table" appearance="outline">
+									<mat-label>Año</mat-label>
+									<input matInput #anioTarjeta maxlength="2"  type="number"  minlength="2" placeholder="Ex. {{anio}}" [formControl]="aniotarjeta" required>
+									<mat-hint align="end">{{anioTarjeta.value.length}} / 2</mat-hint>
+									<mat-error *ngIf="aniotarjeta.errors">{{getErrorMessageAnioarjeta()}}</mat-error>
+									
+								  </mat-form-field></td>
+						  </tr></table>
+						  <table class="example-full-width-table" cellspacing="1"><tr>
+							<td>
+								<mat-form-field class="width-table" appearance="outline">
+									<mat-label>CCV</mat-label>
+									<input matInput #ccvTarjeta maxlength="3"  type="number"  minlength="3" placeholder="Ex.123" [formControl]="ccvtarjeta" required>
+									<mat-hint align="end">{{ccvTarjeta.value.length}} / 3</mat-hint>
+									<mat-error *ngIf="ccvtarjeta.errors">{{getErrorMessageCcvTarjeta()}}</mat-error>
+									
+								  </mat-form-field> </td>
+								  
+							
+						  </tr></table>
+						
+
+						  
+	
+					<button mat-raised-button type="submit" class="botton-largelsu" color="primary">Pagar</button>
+				</form>
+
+				<!-- <div class="message">
+			  
+						<p>Hola, Username confirmando este proceso pagaras $20.000 COP, concepto Membresía Medium. Comprobante de pago sera enviado a(<a href="mailto:paypal@dribbble.com">mail@mail.com</a>)</p>
+						<h6>Recomendamos revisar nuestros terminos & condiciones. Esta transacción puede tardar unos minutos.</h6>
+					</div> -->
+					<div class="footer">
+			  <div class="header">
+				<img src="https://www.openpay.co/_nuxt/img/openpay-color.77b290c.png">
+				<img src="https://cms.areandina.edu.co/sites/default/files/2021-10/logos-tarjetas-credito-financiero-areandina-2021.png">
+			  </div>
+						<a href="#"></a>
+						<h6>Comprobante ID: {{date}}{{mount}}{{anio}}123</h6>
+					</div>
+				</div>
+			</div>
+			<button mat-button mat-raised-button color="accent"  matStepperPrevious>Anterior</button>
+			Contenido 2 - cargado: {{getTimeLoaded(1) | date:'medium'}}
+			<!-- <button mat-button matStepperNext>Next</button> -->
+		</mat-step>
+		
+	  </mat-stepper>
+	  
+
+		
     
 	</div>
   
@@ -78,4 +192,4 @@
 
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

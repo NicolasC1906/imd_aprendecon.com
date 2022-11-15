@@ -43,7 +43,8 @@ export class MatriculasComponent implements OnInit {
         .subscribe((r: any) => {
           this.data = r.data
           this.plan1 = {
-            "id_suscripcion":this.data[0].id_suscripcion,
+            "id":this.data[0].id, 
+            "id_suscripcion":this.data[0].id_suscripcion, 
             "nombre":this.data[0].nombre,
             "precio":this.data[0].precio
           }

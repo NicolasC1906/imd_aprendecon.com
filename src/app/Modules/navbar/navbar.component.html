@@ -45,10 +45,10 @@
           <div>
 
            
-               <!-- profile -->
+               <!-- profile --> 
                <button *ngIf="userLogout" mat-raised-button class="margin-btn"  routerLink="/login" >Inicia Sesión</button>
                <button  *ngIf="userLogout" mat-raised-button class="bg-purple text-white"  routerLink="/registro">Registro</button>
-               <a *ngIf="userFree" mat-raised-button class=" bg-purple text-white"  href="#div_id7" >Adquirir una membresía</a>
+               <a *ngIf="userToken, userFree" mat-raised-button class=" bg-purple text-white"  href="#div_id7" >Adquirir una membresía</a>
 
               <div *ngIf="userToken">
                <a href="">

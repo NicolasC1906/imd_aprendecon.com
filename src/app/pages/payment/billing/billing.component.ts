@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, Validators} from '@angular/forms';
 import { ApiService } from '../../../../services/api.service';
@@ -6,6 +6,8 @@ import { Subscription, timer } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { JavascriptService } from 'src/app/javascript.service';
+import { ActivatedRoute,Router } from '@angular/router';
+
 
 
 @Component({
@@ -23,7 +25,11 @@ export class BillingComponent implements OnInit {
   minute: number = new Date().getMinutes();
   seconds: number = new Date().getSeconds();
 
-  fulldate:any = (this.date, this.mount) ;
+  
+  isLinear = false;
+  checked = false;
+  tabLoadTimes: Date[] = [];
+  
 
   correo: any;
   contrasena: any;
@@ -32,23 +38,88 @@ export class BillingComponent implements OnInit {
   cell: any;
   textoDeInput: any;
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]); 
+  username: any;
+  apellido: any;
+  idUser: any;
+  nombreUser: any;
+  correoUser: any;
+ 
   nombre = new FormControl('', [Validators.required]);
-  apellido = new FormControl('', [Validators.required]);
-  confim_password = new FormControl('', [Validators.required]);
-  tell = new FormControl('', [Validators.required]);
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+  numerotarjeta = new FormControl('', [Validators.required, Validators.minLength(16)]);
+  mestarjeta = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]);
+  aniotarjeta = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]);
+  ccvtarjeta = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]);
+  
+
+  // info suscripción
+   id:any;
+   plan:any = [];
+   data:any = [];
+
+
+// nombre tarjeta
+  getErrorMessagenombre() {
+    if (this.nombre.hasError('required')) {
+      return 'Ingrese nombre titular';
     }
 
-    return this.email.hasError('email') ? 'No es un correo electronico valido' : '';
+    return this.nombre.hasError('nombre') ? 'Ingrese nombre titular' : '';
   }
+// nombre tarjeta
+
+// numero tarjeta
+  getErrorMessagenumerotarjeta() {
+    if (this.numerotarjeta.hasError('required')) {
+      return 'Ingrese minimo 16 digitos';
+    }
+
+    return this.numerotarjeta.hasError('numerotarjeta') ? 'Ingrese minimo 16 digitos' : '';
+  }
+
+// numero tarjeta
+
+// mes tarjeta
+
+  getErrorMessagenMesTarjeta() {
+    if (this.mestarjeta.hasError('required')) {
+      return 'Ingrese minimo 2 digitos';
+    }
+
+    return this.mestarjeta.hasError('mestarjeta') ? 'Ingrese minimo 2 digitos' : '';
+  }
+
+  // mes tarjeta
+
+  // Año tarjeta
+  getErrorMessageAnioarjeta() {
+    if (this.aniotarjeta.hasError('required')) {
+      return 'Ingrese minimo 2 digitos';
+    }
+
+    return this.aniotarjeta.hasError('aniotarjeta') ? 'Ingrese minimo 2 digitos' : '';
+  }
+
+  // Año tarjeta
+
+// CCV tarjeta
+  getErrorMessageCcvTarjeta() {
+    if (this.ccvtarjeta.hasError('required')) {
+      return 'Ingrese minimo 3 digitos';
+    }
+
+    return this.ccvtarjeta.hasError('ccvtarjeta') ? 'Ingrese minimo 3 digitos' : '';
+  }
+
+// CCV tarjeta
+
+
   policy = this._formBuilder.group({
     TerminosCondiciones : false,
     TratamiendoDatos: false,
     PolíticasPrivacidad: false,
+  });
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
   });
 
   
@@ -59,45 +130,124 @@ paymentForm: any;
     private ApiService: ApiService,
     private cookies:CookieService,
     private _formBuilder: FormBuilder,
-    private Javascript:JavascriptService
+    private Javascript:JavascriptService,
+    private router: Router,
+    private ActivatedRoute: ActivatedRoute,
   ) { 
-    Javascript.Carga(["script/credit"])
+    Javascript.Carga(["script/credit"]),
+    this.id= this.ActivatedRoute.snapshot.paramMap.get('id_suscripcion')
+    console.log("prueba ID",this.id)
   }
  
 
   ngOnInit(): void {
-    this.userVerification()
+    this.getInfo()
+    this. getPrice()
   }
-
-  userVerification(){
-    if(this.cookies.get("token")){
-      console.log("Inicio Sesion")
-      
-    }else{
-      console.log("Usuario violo los estatutos de seguridad")
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Para continuar te invitamos a registrarte o iniciar sesión en Aprendecon!',
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-        backdrop: `
-        #5524d0c0 `
-        
-        
-      }).then((timer) => {
-         window.location.href = '/login'
-      })
-      
-      
-        
   
-          
-        
-      
+  getTimeLoaded(index: number) {
+    if (!this.tabLoadTimes[index]) {
+      this.tabLoadTimes[index] = new Date();
     }
+
+    return this.tabLoadTimes[index];
   }
+  
+  getInfo(){
+    // console.log("entro o no")
+    this.idUser = localStorage.getItem("id")
+    this.subscriptions.push(
+        this.ApiService.getUsersById(this.idUser)
+        .subscribe((r: any) => {
+          //console.log("🚀 ~ file: navbar.component.ts ~ line 108 ~ NavbarComponent ~ .subscribe ~ r", r)
+           this.username = r.username,
+           this.nombreUser = r.nombre
+           this.apellido = r.apellido
+           this.correoUser= r.correo
+        }
+
+        ));
+      }
+
+
+      getPrice(){
+        // console.log(id)
+        //console.log(t his.id);
+        this.subscriptions.push(
+          this.ApiService
+          .getPrice()  
+            .subscribe((r: any) => {
+              this.data = r.data
+
+              if( this.data[0].id_suscripcion === this.id){
+                
+                this.plan = {
+                     "id":this.data[0].id, 
+                     "id_suscripcion":this.data[0].id_suscripcion, 
+                     "tipo":this.data[0].tipo,
+                     "nombre":this.data[0].nombre,
+                     "precio":this.data[0].precio
+                   }
+                   console.log("soy prueba correcta 0", this.plan)
+              } else if( this.data[1].id_suscripcion === this.id){
+                
+                this.plan = {
+                     "id":this.data[1].id, 
+                     "id_suscripcion":this.data[1].id_suscripcion, 
+                     "tipo":this.data[1].tipo,
+                     "nombre":this.data[1].nombre,
+                     "precio":this.data[1].precio
+                   }
+                   console.log("soy prueba correcta 1", this.plan)
+              } else if( this.data[2].id_suscripcion === this.id){
+                
+                this.plan = {
+                     "id":this.data[2].id, 
+                     "id_suscripcion":this.data[2].id_suscripcion, 
+                     "tipo":this.data[2].tipo,
+                     "nombre":this.data[2].nombre,
+                     "precio":this.data[2].precio
+                   }
+                   console.log("soy prueba correcta 2", this.plan)
+              }else if( this.data[3].id_suscripcion === this.id){
+                
+                this.plan = {
+                     "id":this.data[3].id, 
+                     "id_suscripcion":this.data[3].id_suscripcion, 
+                     "tipo":this.data[3].tipo,
+                     "nombre":this.data[3].nombre,
+                     "precio":this.data[3].precio
+                   }
+                   console.log("soy prueba correcta 3", this.plan)
+              } else if( this.data[4].id_suscripcion === this.id){
+                
+                this.plan = {
+                     "id":this.data[4].id, 
+                     "id_suscripcion":this.data[4].id_suscripcion, 
+                     "tipo":this.data[4].tipo,
+                     "nombre":this.data[4].nombre,
+                     "precio":this.data[4].precio
+                   }
+                   console.log("soy prueba correcta 4", this.plan)
+              }else if( this.data[5].id_suscripcion === this.id){
+                
+                this.plan = {
+                     "id":this.data[5].id, 
+                     "id_suscripcion":this.data[5].id_suscripcion, 
+                     "tipo":this.data[5].tipo,
+                     "nombre":this.data[5].nombre,
+                     "precio":this.data[5].precio
+                   }
+                   console.log("soy prueba correcta 5", this.plan)
+              }else{
+                console.log(" prueba inorrecta")
+              }
+            
+            }
+            
+          ));
+        }   
+
 
 
 

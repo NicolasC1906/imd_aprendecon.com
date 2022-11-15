@@ -25,6 +25,7 @@ import { RegistroComponent } from './Modules/auth/registro/registro.component';
 import { RestablecerComponent } from './Modules/auth/restablecer/restablecer.component';
 import { CentralComponent } from './pages/central/central.component';
 import { BillingComponent } from './pages/payment/billing/billing.component'; 
+import { AuthGuard } from './Modules/auth/auth.guard';
 
 
 
@@ -43,8 +44,8 @@ const routes: Routes = [
   {path: 'registro', component: RegistroComponent},
   {path: 'restablecer', component: RestablecerComponent},
   {path: 'central', component: CentralComponent},
-  {path: 'billing', component: BillingComponent},
-  {path: 'central', component: CentralComponent},
+  {path: 'billing/:id_suscripcion', component: BillingComponent, canActivate:[AuthGuard]},
+  {path: 'central', component: CentralComponent, canActivate:[AuthGuard]},
   {path: '**', pathMatch:"full", component: ErrorPageComponent},// encima de este siempre billing
 
 ];
