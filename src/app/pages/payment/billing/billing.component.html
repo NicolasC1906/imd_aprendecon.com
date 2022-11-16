@@ -70,8 +70,8 @@
 					</div>
 				</div>
 			</div>
-			<button mat-button mat-raised-button class="bg-purple" color="primary" matStepperNext>Continuar</button>
-			Contenido 1 - cargado: {{getTimeLoaded(1) | date:'medium'}}
+			<button mat-button mat-raised-button matTooltip="Al continuar se aceptan terminos & condiciones" class="bg-purple" color="primary" matStepperNext>Continuar</button>
+			<!-- Contenido 1 - cargado: {{getTimeLoaded(1) | date:'medium'}} -->
 		</mat-step>
 		<mat-step  label="Pago">
 			<div class="left">
@@ -112,12 +112,12 @@
 					<form >
 						<mat-form-field class="example-full-width" appearance="outline">
 						  <mat-label>Nombre del titular</mat-label>
-						  <input matInput placeholder="Ex. Pepe Perez" [formControl]="nombre" required>
+						  <input matInput placeholder="Ex. Pepe Perez" [formControl]="nombre" name="holder_name" [(ngModel)]="holder_name" required>
 						  <mat-error *ngIf="nombre.errors">{{getErrorMessagenombre()}}</mat-error>
 						</mat-form-field>
 						<mat-form-field class="example-full-width" appearance="outline">
 							<mat-label>Numero Tarjeta</mat-label>
-							<input matInput type="tel" #numeroTarjeta minlength="16" maxlength="20" placeholder="Ex. 5254133674403564" [formControl]="numerotarjeta" required>
+							<input matInput type="tel" #numeroTarjeta minlength="16" maxlength="20" placeholder="Ex. 5254133674403564" [formControl]="numerotarjeta" name="card_number" [(ngModel)]="card_number" required>
 							<mat-hint align="end">{{numeroTarjeta.value.length}} / 19</mat-hint>
 							<mat-error *ngIf="numerotarjeta.errors">{{getErrorMessagenumerotarjeta()}}</mat-error> 
 							
@@ -127,7 +127,7 @@
 							<td>
 								<mat-form-field class="width-table" appearance="outline">
 									<mat-label>Mes</mat-label>
-									<input matInput #mesTarjeta maxlength="2" maxlength="2" type="number" minlength="2" placeholder="Ex. {{mount}}" [formControl]="mestarjeta" required>
+									<input matInput #mesTarjeta maxlength="2" maxlength="2" type="number" minlength="2" placeholder="Ex. {{mount}}" [formControl]="mestarjeta" name="expiration_month" [(ngModel)]="expiration_month" required>
 									<mat-hint align="end">{{mesTarjeta.value.length}} / 2</mat-hint>
 									<mat-error *ngIf="mestarjeta.errors">{{getErrorMessagenMesTarjeta()}}</mat-error>
 									
@@ -136,7 +136,7 @@
 							<td> 
 								<mat-form-field class="width-table" appearance="outline">
 									<mat-label>Año</mat-label>
-									<input matInput #anioTarjeta maxlength="2"  type="number"  minlength="2" placeholder="Ex. {{anio}}" [formControl]="aniotarjeta" required>
+									<input matInput #anioTarjeta maxlength="2"  type="number"  minlength="2" placeholder="Ex. {{anio}}" [formControl]="aniotarjeta" name="expiration_year" [(ngModel)]="expiration_year" required>
 									<mat-hint align="end">{{anioTarjeta.value.length}} / 2</mat-hint>
 									<mat-error *ngIf="aniotarjeta.errors">{{getErrorMessageAnioarjeta()}}</mat-error>
 									
@@ -146,7 +146,7 @@
 							<td>
 								<mat-form-field class="width-table" appearance="outline">
 									<mat-label>CCV</mat-label>
-									<input matInput #ccvTarjeta maxlength="3"  type="number"  minlength="3" placeholder="Ex.123" [formControl]="ccvtarjeta" required>
+									<input matInput #ccvTarjeta maxlength="3"  type="number"  minlength="3" placeholder="Ex.123" [formControl]="ccvtarjeta" name="cvv2" [(ngModel)]="cvv2" required>
 									<mat-hint align="end">{{ccvTarjeta.value.length}} / 3</mat-hint>
 									<mat-error *ngIf="ccvtarjeta.errors">{{getErrorMessageCcvTarjeta()}}</mat-error>
 									
@@ -158,7 +158,8 @@
 
 						  
 	
-					<button mat-raised-button type="submit" class="botton-largelsu" color="primary">Pagar</button>
+					<button mat-raised-button (click)="postCard()" type="submit" matTooltip="Se procesara pago de acuerdo con terminos & condiciones" class="botton-largelsu" color="primary">Pagar</button>
+				
 				</form>
 
 				<!-- <div class="message">
@@ -176,8 +177,8 @@
 					</div>
 				</div>
 			</div>
-			<button mat-button mat-raised-button color="accent"  matStepperPrevious>Anterior</button>
-			Contenido 2 - cargado: {{getTimeLoaded(1) | date:'medium'}}
+			<button mat-button mat-raised-button color="accent" matTooltip="Volver Información Pago" matStepperPrevious>Anterior</button>
+			<!-- Contenido 2 - cargado: {{getTimeLoaded(1) | date:'medium'}} -->
 			<!-- <button mat-button matStepperNext>Next</button> -->
 		</mat-step>
 		
@@ -191,5 +192,4 @@
   
 
 </div>
-
-<!-- <app-footer></app-footer> -->
+<app-footer></app-footer>

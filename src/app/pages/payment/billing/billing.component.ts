@@ -51,6 +51,17 @@ export class BillingComponent implements OnInit {
   ccvtarjeta = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]);
   
 
+  // form card
+
+  card_number:any;
+  holder_name: any;
+  expiration_year:any;
+  expiration_month:any;
+  cvv2:any;
+
+  
+// form card
+
   // info suscripción
    id:any;
    plan:any = [];
@@ -136,13 +147,14 @@ paymentForm: any;
   ) { 
     Javascript.Carga(["script/credit"]),
     this.id= this.ActivatedRoute.snapshot.paramMap.get('id_suscripcion')
-    console.log("prueba ID",this.id)
+    //console.log("prueba ID",this.id)
   }
- 
+  
 
   ngOnInit(): void {
     this.getInfo()
     this. getPrice()
+    this.getCustomer()
   }
   
   getTimeLoaded(index: number) {
@@ -168,6 +180,42 @@ paymentForm: any;
 
         ));
       }
+     
+   getCustomer(){
+    this.idUser = localStorage.getItem("id")
+    this.subscriptions.push(
+      this.ApiService.getPayCustomer(this.idUser)
+      .subscribe((r: any)=> {
+       // console.log(r)
+        this.cookies.set("CUST_API", r.id_customer)
+      }) 
+    )
+   }
+   
+   postCard(){
+    const user = {
+      id_user: this.idUser,
+      card_number:this.card_number,
+      holder_name:this.holder_name,
+      expiration_year:(this.expiration_year).toString(),
+      expiration_month:(this.expiration_month).toString(),
+      cvv2: this.cvv2.toString()
+    }
+    //console.log("Esto es card 1",user);
+     this.ApiService.postCard(user).subscribe( data => {
+       //console.log("Esto es card 2",data);
+       this.cookies.set("CAR_API", data.id_data)
+       const pay = {
+        id_user: this.idUser,
+        id_suscripcion: this.id,
+        id_card:data.id_data,
+        id_customer: this.cookies.get("CUST_API")
+      }
+       this.ApiService.postPay(pay).subscribe( resp => {
+        console.log("Esto es pay", resp);
+       })
+     })
+   }
 
 
       getPrice(){
@@ -188,7 +236,7 @@ paymentForm: any;
                      "nombre":this.data[0].nombre,
                      "precio":this.data[0].precio
                    }
-                   console.log("soy prueba correcta 0", this.plan)
+                  // console.log("soy prueba correcta 0", this.plan)
               } else if( this.data[1].id_suscripcion === this.id){
                 
                 this.plan = {
@@ -198,7 +246,7 @@ paymentForm: any;
                      "nombre":this.data[1].nombre,
                      "precio":this.data[1].precio
                    }
-                   console.log("soy prueba correcta 1", this.plan)
+                   //console.log("soy prueba correcta 1", this.plan)
               } else if( this.data[2].id_suscripcion === this.id){
                 
                 this.plan = {
@@ -208,7 +256,7 @@ paymentForm: any;
                      "nombre":this.data[2].nombre,
                      "precio":this.data[2].precio
                    }
-                   console.log("soy prueba correcta 2", this.plan)
+                  // console.log("soy prueba correcta 2", this.plan)
               }else if( this.data[3].id_suscripcion === this.id){
                 
                 this.plan = {
@@ -218,7 +266,7 @@ paymentForm: any;
                      "nombre":this.data[3].nombre,
                      "precio":this.data[3].precio
                    }
-                   console.log("soy prueba correcta 3", this.plan)
+                  //console.log("soy prueba correcta 3", this.plan)
               } else if( this.data[4].id_suscripcion === this.id){
                 
                 this.plan = {
@@ -228,7 +276,7 @@ paymentForm: any;
                      "nombre":this.data[4].nombre,
                      "precio":this.data[4].precio
                    }
-                   console.log("soy prueba correcta 4", this.plan)
+                   //console.log("soy prueba correcta 4", this.plan)
               }else if( this.data[5].id_suscripcion === this.id){
                 
                 this.plan = {
@@ -238,7 +286,7 @@ paymentForm: any;
                      "nombre":this.data[5].nombre,
                      "precio":this.data[5].precio
                    }
-                   console.log("soy prueba correcta 5", this.plan)
+                   //console.log("soy prueba correcta 5", this.plan)
               }else{
                 console.log(" prueba inorrecta")
               }

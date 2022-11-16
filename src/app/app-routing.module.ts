@@ -26,6 +26,8 @@ import { RestablecerComponent } from './Modules/auth/restablecer/restablecer.com
 import { CentralComponent } from './pages/central/central.component';
 import { BillingComponent } from './pages/payment/billing/billing.component'; 
 import { AuthGuard } from './Modules/auth/auth.guard';
+import { PayaceptComponent } from './pages/payment/payacept/payacept.component';
+import { PaydeclinedComponent } from './pages/payment/paydeclined/paydeclined.component';
 
 
 
@@ -45,6 +47,8 @@ const routes: Routes = [
   {path: 'restablecer', component: RestablecerComponent},
   {path: 'central', component: CentralComponent},
   {path: 'billing/:id_suscripcion', component: BillingComponent, canActivate:[AuthGuard]},
+  {path: 'confirmed', component: PayaceptComponent, canActivate:[AuthGuard]},
+  {path: 'declined', component: PaydeclinedComponent, canActivate:[AuthGuard]},
   {path: 'central', component: CentralComponent, canActivate:[AuthGuard]},
   {path: '**', pathMatch:"full", component: ErrorPageComponent},// encima de este siempre billing
 

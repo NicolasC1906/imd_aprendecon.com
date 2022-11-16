@@ -261,4 +261,32 @@ getCentralInfo(){
 
 //METODO GET - MOODLE CURSOS RECIENTES  - End//
 
+
+//METODO pasarela de pagos - Start//
+
+getPayCustomer(id:any){
+
+  let header = new HttpHeaders()
+  .set('Type-content', 'aplication/json')
+
+  return this.http.get(`${this.ApiAprendecon}customer/${id}`,{
+    headers: header
+  });
+
+}
+
+postCard(user: any): Observable<any> {
+  // console.log("🚀 ~ file: api.service.ts ~ line 97 ~ ApiService ~ loginAuth ~ user", user)
+  return this.http.post("https://elearning.apiimd.com/api/customer/card", user);
+  
+}
+
+postPay(user: any): Observable<any> {
+  // console.log("🚀 ~ file: api.service.ts ~ line 97 ~ ApiService ~ loginAuth ~ user", user)
+  return this.http.post("https://elearning.apiimd.com/api/customer/pay", user);
+  
+}
+
+//METODO pasarela de pagos  - End//
+
 }

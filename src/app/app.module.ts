@@ -87,6 +87,8 @@ import { RegistroComponent } from './Modules/auth/registro/registro.component';
 import { RestablecerComponent } from './Modules/auth/restablecer/restablecer.component';
 import { CentralComponent } from './pages/central/central.component';
 import { BillingComponent } from './pages/payment/billing/billing.component';
+import { PayaceptComponent } from './pages/payment/payacept/payacept.component';
+import { PaydeclinedComponent } from './pages/payment/paydeclined/paydeclined.component';
 
 
 @NgModule({
@@ -114,6 +116,8 @@ import { BillingComponent } from './pages/payment/billing/billing.component';
     RestablecerComponent,
     CentralComponent,
     BillingComponent,
+    PayaceptComponent,
+    PaydeclinedComponent,
   ],
   imports: [
     HttpClientModule,
