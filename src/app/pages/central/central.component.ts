@@ -28,7 +28,7 @@ export class CentralComponent implements OnInit {
 
   ngOnInit(): void {
 
-this.userVerification()
+
     
   }
 
@@ -62,31 +62,6 @@ this.userVerification()
     return styles
   }
 
-  userVerification(){
-    if(this.cookies.get("token")){
-      // console.log("Inicio Sesion")
-      this.getInfoCentral()
-    }else{
-      console.log("Usuario violo los estatutos de seguridad")
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No has iniciado sesión en Aprendecon!',
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-        backdrop: `
-        #5624d0
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `
-        
-      }).then((timer) => {
-         window.location.href = '/login'
-      })
-    }
-  }
   
 
 }

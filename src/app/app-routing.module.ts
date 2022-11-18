@@ -45,7 +45,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'restablecer', component: RestablecerComponent},
-  {path: 'central', component: CentralComponent},
+  {path: 'central', component: CentralComponent, canActivate:[AuthGuard]},
   {path: 'billing/:id_suscripcion', component: BillingComponent, canActivate:[AuthGuard]},
   {path: 'confirmed', component: PayaceptComponent, canActivate:[AuthGuard]},
   {path: 'declined', component: PaydeclinedComponent, canActivate:[AuthGuard]},

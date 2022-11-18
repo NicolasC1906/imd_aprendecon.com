@@ -1,13 +1,24 @@
 import { Component, OnInit, } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {FormBuilder, Validators} from '@angular/forms';
+import {  ReactiveFormsModule ,FormControl, FormGroupDirective, FormBuilder, NgForm,Validators, FormGroup} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 import { ApiService } from '../../../../services/api.service';
 import { Subscription, timer } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { JavascriptService } from 'src/app/javascript.service';
 import { ActivatedRoute,Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogContentPayComponent } from '../../../pages/payment/billing/dialog-content-pay/dialog-content-pay.component';
 
+ interface Meses {
+  value: string;
+  viewValue: string;
+}
+
+interface Anios {
+  value: string;
+  viewValue: string;
+}
 
 
 @Component({
@@ -16,6 +27,9 @@ import { ActivatedRoute,Router } from '@angular/router';
   styleUrls: ['./billing.component.scss']
 })
 export class BillingComponent implements OnInit {
+minLength(arg0: number): string {
+throw new Error('Method not implemented.');
+}
   
   date: number = new Date().getDate();
   mount: number = new Date().getMonth();
@@ -44,12 +58,20 @@ export class BillingComponent implements OnInit {
   nombreUser: any;
   correoUser: any;
  
-  nombre = new FormControl('', [Validators.required]);
-  numerotarjeta = new FormControl('', [Validators.required, Validators.minLength(16)]);
-  mestarjeta = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]);
-  aniotarjeta = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]);
-  ccvtarjeta = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]);
+  nombre = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  numerotarjeta = new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(28)]);
+  mestarjeta = new FormControl('', [Validators.required]);
+  aniotarjeta = new FormControl('', [Validators.required]);
+  ccvtarjeta = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern("^[0-9]*$")]);
   
+  public payForm = new FormGroup({
+    name: this.nombre,
+    numerotarjeta: this.numerotarjeta,
+    lastName: this.numerotarjeta,
+    mestarjeta: this.mestarjeta,
+    aniotarjeta: this.aniotarjeta,
+    ccvtarjeta: this.ccvtarjeta,
+  });
 
   // form card
 
@@ -67,72 +89,54 @@ export class BillingComponent implements OnInit {
    plan:any = [];
    data:any = [];
 
+   mes: Meses[] = [
+    {viewValue: 'Enero', value: '01'},
+    {viewValue: 'Febrero', value: '02'},
+    {viewValue: 'Marzo', value: '03'},
+    {viewValue: 'Abril', value: '04'},
+    {viewValue: 'Mayo', value: '05'},
+    {viewValue: 'Junio', value: '06'},
+    {viewValue: 'Julio', value: '08'},
+    {viewValue: 'Agosto', value: '09'},
+    {viewValue: 'Septiembre', value: '10'},
+    {viewValue: 'Noviembre', value: '11'},
+    {viewValue: 'Diciembre', value: '12'},
+  ];
+  selectedMes = this.mes[0].value;
 
-// nombre tarjeta
-  getErrorMessagenombre() {
-    if (this.nombre.hasError('required')) {
-      return 'Ingrese nombre titular';
-    }
-
-    return this.nombre.hasError('nombre') ? 'Ingrese nombre titular' : '';
-  }
-// nombre tarjeta
-
-// numero tarjeta
-  getErrorMessagenumerotarjeta() {
-    if (this.numerotarjeta.hasError('required')) {
-      return 'Ingrese minimo 16 digitos';
-    }
-
-    return this.numerotarjeta.hasError('numerotarjeta') ? 'Ingrese minimo 16 digitos' : '';
-  }
-
-// numero tarjeta
-
-// mes tarjeta
-
-  getErrorMessagenMesTarjeta() {
-    if (this.mestarjeta.hasError('required')) {
-      return 'Ingrese minimo 2 digitos';
-    }
-
-    return this.mestarjeta.hasError('mestarjeta') ? 'Ingrese minimo 2 digitos' : '';
+  selectCar(event: Event) {
+    this.selectedMes = (event.target as HTMLSelectElement).value;
   }
 
-  // mes tarjeta
+  annio: Anios[] = [
+    {value: '22', viewValue: '2022'},
+    {value: '23', viewValue: '2023'},
+    {value: '24', viewValue: '2024'},
+    {value: '25', viewValue: '2025'},
+    {value: '26', viewValue: '2026'},
+    {value: '27', viewValue: '2027'},
+    {value: '28', viewValue: '2028'},
+    {value: '29', viewValue: '2029'},
+  ];
+  selectedAnios = this.annio[0].value;
 
-  // Año tarjeta
-  getErrorMessageAnioarjeta() {
-    if (this.aniotarjeta.hasError('required')) {
-      return 'Ingrese minimo 2 digitos';
-    }
+  selectAnios(event: Event) {
+    this.selectedMes = (event.target as HTMLSelectElement).value;
+  } 
+ 
 
-    return this.aniotarjeta.hasError('aniotarjeta') ? 'Ingrese minimo 2 digitos' : '';
-  }
+  
 
-  // Año tarjeta
-
-// CCV tarjeta
-  getErrorMessageCcvTarjeta() {
-    if (this.ccvtarjeta.hasError('required')) {
-      return 'Ingrese minimo 3 digitos';
-    }
-
-    return this.ccvtarjeta.hasError('ccvtarjeta') ? 'Ingrese minimo 3 digitos' : '';
-  }
-
-// CCV tarjeta
-
-
-  policy = this._formBuilder.group({
-    TerminosCondiciones : false,
-    TratamiendoDatos: false,
-    PolíticasPrivacidad: false,
-  });
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentPayComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   
 
   subscriptions:Subscription[]=[];
@@ -144,6 +148,7 @@ paymentForm: any;
     private Javascript:JavascriptService,
     private router: Router,
     private ActivatedRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) { 
     Javascript.Carga(["script/credit"]),
     this.id= this.ActivatedRoute.snapshot.paramMap.get('id_suscripcion')
@@ -155,6 +160,10 @@ paymentForm: any;
     this.getInfo()
     this. getPrice()
     this.getCustomer()
+  }
+  
+  onSubmit(): void{
+console.log('Form')
   }
   
   getTimeLoaded(index: number) {
@@ -201,19 +210,19 @@ paymentForm: any;
       expiration_month:(this.expiration_month).toString(),
       cvv2: this.cvv2.toString()
     }
-    //console.log("Esto es card 1",user);
-     this.ApiService.postCard(user).subscribe( data => {
-       //console.log("Esto es card 2",data);
-       this.cookies.set("CAR_API", data.id_data)
-       const pay = {
-        id_user: this.idUser,
-        id_suscripcion: this.id,
-        id_card:data.id_data,
-        id_customer: this.cookies.get("CUST_API")
-      }
-       this.ApiService.postPay(pay).subscribe( resp => {
-        console.log("Esto es pay", resp);
-       })
+   // console.log("Esto es card 1",user);
+      this.ApiService.postCard(user).subscribe( data => {
+        console.log("Esto es card 2",data);
+        this.cookies.set("CAR_API", data.id_data)
+        const pay = {
+         id_user: this.idUser,
+         id_suscripcion: this.id,
+         id_card:data.id_data,
+         id_customer: this.cookies.get("CUST_API")
+       }
+        this.ApiService.postPay(pay).subscribe( resp => {
+         console.log("Esto es pay", resp);
+        })
      })
    }
 

@@ -91,6 +91,30 @@
 						<i class="icon-star" aria-hidden="true"></i>
 						<p>Membresía:<span> {{plan.nombre}}</span></p>
 					</div>
+					<button mat-button color="accent" (click)="openDialog()">Ver condiciones de compra</button>
+					<!-- <h3 class="text-white">Datos Tarjeta</h3>
+
+					<div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Nombre:<span> {{holder_name}}</span></p>
+					</div>
+					<div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Numero:<span> {{card_number}}</span></p>
+					</div>
+					<div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Fecha:<span> {{selectedMes}}/{{selectedAnios}}</span></p>
+					</div>
+					<div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Codigo:<span> {{cvv2}}</span></p>
+					</div> -->
+					<!-- <div class="entry entry-padding">
+						<i class="icon-star" aria-hidden="true"></i>
+						<p>Fecha Tarjeta:<span> {{selectedMes}}/{{selectedAnios}}</span></p>
+					</div> -->
+					
 					<!-- <div class="entry">
 						<i class="icon-notebook" aria-hidden="true"></i>
 						<p>Confirmación #:<span> 0YX123580219G</span></p>
@@ -109,57 +133,115 @@
 						<h5> {{plan.nombre}} Total: {{plan.precio | currency: 'USD' : 'symbol' : '1.0-0'  }} COP</h5>
 					</div>
 	
-					<form >
+					<form>
+
 						<mat-form-field class="example-full-width" appearance="outline">
 						  <mat-label>Nombre del titular</mat-label>
 						  <input matInput placeholder="Ex. Pepe Perez" [formControl]="nombre" name="holder_name" [(ngModel)]="holder_name" required>
-						  <mat-error *ngIf="nombre.errors">{{getErrorMessagenombre()}}</mat-error>
+						  <mat-error *ngIf="nombre.hasError('minlength') &&
+							!nombre.hasError('required')">
+							Escribir nombre impreso en tarjeta
+							</mat-error>
+						  <mat-error *ngIf="nombre.hasError('required')">
+							Nombre es <strong>requerido</strong>
+						  </mat-error>
 						</mat-form-field>
+
 						<mat-form-field class="example-full-width" appearance="outline">
 							<mat-label>Numero Tarjeta</mat-label>
-							<input matInput type="tel" #numeroTarjeta minlength="16" maxlength="20" placeholder="Ex. 5254133674403564" [formControl]="numerotarjeta" name="card_number" [(ngModel)]="card_number" required>
-							<mat-hint align="end">{{numeroTarjeta.value.length}} / 19</mat-hint>
-							<mat-error *ngIf="numerotarjeta.errors">{{getErrorMessagenumerotarjeta()}}</mat-error> 
-							
+							<input matInput type="tel" #numeroTarjeta minlength="16" maxlength="28" placeholder="Ex. 5254133674403564" [formControl]="numerotarjeta" name="card_number" [(ngModel)]="card_number" required>
+							<mat-hint align="end">{{numeroTarjeta.value.length}} / 28</mat-hint>
+							<!-- <mat-error *ngIf="numerotarjeta.errors">{{getErrorMessagenumerotarjeta()}}</mat-error>  -->
+							<mat-error *ngIf="numerotarjeta.hasError('maxLength') &&
+							!nombre.hasError('required')">
+							Maximo 28 Numeros de tarjeta
+							</mat-error>
+							<mat-error *ngIf="numerotarjeta.hasError('minlength') &&
+							!nombre.hasError('required')">
+							Minimo 16 Numeros de tarjeta
+							</mat-error>
+						  <mat-error *ngIf="numerotarjeta.hasError('required')">
+							Numero es <strong>requerido</strong>
+						  </mat-error>
 						</mat-form-field>
 						 
 						<table class="example-full-width-table" cellspacing="0"><tr>
-							<td>
+							<!-- <td>
 								<mat-form-field class="width-table" appearance="outline">
 									<mat-label>Mes</mat-label>
-									<input matInput #mesTarjeta maxlength="2" maxlength="2" type="number" minlength="2" placeholder="Ex. {{mount}}" [formControl]="mestarjeta" name="expiration_month" [(ngModel)]="expiration_month" required>
+									<input matInput #mesTarjeta maxlength="2" maxlength="2" type="number" minlength="2" placeholder="Ex. {{mount}}" formControlName="mestarjeta" name="expiration_month" [(ngModel)]="expiration_month" required>
 									<mat-hint align="end">{{mesTarjeta.value.length}} / 2</mat-hint>
 									<mat-error *ngIf="mestarjeta.errors">{{getErrorMessagenMesTarjeta()}}</mat-error>
 									
-								  </mat-form-field> </td>
+								  </mat-form-field> </td> -->
+
+						    <td>
+								<mat-form-field class="width-table"  appearance="outline">
+									<mat-label>Mes</mat-label>
+									<mat-select [(value)]="selectedMes" [formControl]="mestarjeta" name="expiration_month" [(ngModel)]="expiration_month" required>
+									  <mat-option></mat-option>
+									  <mat-option [value]="option.value" *ngFor="let option of mes">{{ option.viewValue }}</mat-option>
+									</mat-select>
+									<!-- <mat-error *ngIf="mestarjeta.errors">{{getErrorMessagenMesTarjeta()}}</mat-error> -->
+									<mat-error *ngIf="mestarjeta.hasError('required')">
+										Mes es <strong>requerido</strong>
+									  </mat-error>
+								  </mat-form-field></td>
+						   <td>
+									<mat-form-field class="width-table"  appearance="outline">
+										<mat-label>Año</mat-label>
+										<mat-select [(value)]="selectedAnios" [formControl]="aniotarjeta" name="expiration_year" [(ngModel)]="expiration_year" required>
+										  <mat-option></mat-option>
+										  <mat-option [value]="option.value" *ngFor="let option of annio">{{ option.viewValue }}</mat-option>
+										</mat-select>
+										<!-- <mat-error *ngIf="aniotarjeta.errors">{{getErrorMessageAnioarjeta()}}</mat-error> -->
+										<mat-error *ngIf="aniotarjeta.hasError('required')">
+											Año es <strong>requerido</strong>
+										  </mat-error>
+									  </mat-form-field>
+									  </td>
+									
 								  
-							<td> 
+							<!-- <td> 
 								<mat-form-field class="width-table" appearance="outline">
 									<mat-label>Año</mat-label>
-									<input matInput #anioTarjeta maxlength="2"  type="number"  minlength="2" placeholder="Ex. {{anio}}" [formControl]="aniotarjeta" name="expiration_year" [(ngModel)]="expiration_year" required>
+									<input matInput #anioTarjeta maxlength="2"  type="number"  minlength="2" placeholder="Ex. {{anio}}" formControlName="aniotarjeta" name="expiration_year" [(ngModel)]="expiration_year" required>
 									<mat-hint align="end">{{anioTarjeta.value.length}} / 2</mat-hint>
 									<mat-error *ngIf="aniotarjeta.errors">{{getErrorMessageAnioarjeta()}}</mat-error>
-									
-								  </mat-form-field></td>
+				 					
+								  </mat-form-field></td> -->
 						  </tr></table>
 						  <table class="example-full-width-table" cellspacing="1"><tr>
 							<td>
 								<mat-form-field class="width-table" appearance="outline">
 									<mat-label>CCV</mat-label>
-									<input matInput #ccvTarjeta maxlength="3"  type="number"  minlength="3" placeholder="Ex.123" [formControl]="ccvtarjeta" name="cvv2" [(ngModel)]="cvv2" required>
+									<input matInput #ccvTarjeta type="tel"  minlength="3"  maxlength="4"  placeholder="Ex.123" [formControl]="ccvtarjeta"  name="cvv2" [(ngModel)]="cvv2" required>
 									<mat-hint align="end">{{ccvTarjeta.value.length}} / 3</mat-hint>
-									<mat-error *ngIf="ccvtarjeta.errors">{{getErrorMessageCcvTarjeta()}}</mat-error>
-									
+									<!-- <mat-error *ngIf="ccvtarjeta.errors">{{getErrorMessageCcvTarjeta()}}</mat-error> -->
+									<mat-error *ngIf="ccvtarjeta.hasError('maxLength') &&
+							!nombre.hasError('required')">
+							Maximo 4 Numeros de Codigo de seguridad 
+							</mat-error>
+							<mat-error *ngIf="ccvtarjeta.hasError('minlength') &&
+							!nombre.hasError('required')">
+							Minimo 3 Numeros de Codigo de seguridad 
+							</mat-error>
+						  <mat-error *ngIf="ccvtarjeta.hasError('required')">
+							Codigo de seguridad es <strong>requerido</strong>
+						  </mat-error>
 								  </mat-form-field> </td>
 								  
 							
 						  </tr></table>
 						
-
+						 
 						  
 	
-					<button mat-raised-button (click)="postCard()" type="submit" matTooltip="Se procesara pago de acuerdo con terminos & condiciones" class="botton-largelsu" color="primary">Pagar</button>
-				
+					<button mat-raised-button (click)="postCard()"  
+					
+					[disabled]="!payForm.valid"
+					 type="submit" matTooltip="Se procesara pago de acuerdo con terminos & condiciones" class="botton-largelsu" color="primary">Pagar</button>
+					
 				</form>
 
 				<!-- <div class="message">

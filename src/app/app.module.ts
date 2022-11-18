@@ -89,6 +89,7 @@ import { CentralComponent } from './pages/central/central.component';
 import { BillingComponent } from './pages/payment/billing/billing.component';
 import { PayaceptComponent } from './pages/payment/payacept/payacept.component';
 import { PaydeclinedComponent } from './pages/payment/paydeclined/paydeclined.component';
+import { DialogContentPayComponent } from './pages/payment/billing/dialog-content-pay/dialog-content-pay.component';
 
 
 @NgModule({
@@ -118,6 +119,7 @@ import { PaydeclinedComponent } from './pages/payment/paydeclined/paydeclined.co
     BillingComponent,
     PayaceptComponent,
     PaydeclinedComponent,
+    DialogContentPayComponent,
   ],
   imports: [
     HttpClientModule,
