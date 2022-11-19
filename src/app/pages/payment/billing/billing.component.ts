@@ -9,6 +9,7 @@ import { JavascriptService } from 'src/app/javascript.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogContentPayComponent } from '../../../pages/payment/billing/dialog-content-pay/dialog-content-pay.component';
+import { ReCaptchaV3Service } from 'ngx-captcha';
 
  interface Meses {
   value: string;
@@ -63,6 +64,9 @@ throw new Error('Method not implemented.');
   mestarjeta = new FormControl('', [Validators.required]);
   aniotarjeta = new FormControl('', [Validators.required]);
   ccvtarjeta = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern("^[0-9]*$")]);
+  recaptcha =   new FormControl('', [Validators.required]);
+
+  siteKey:string = "6LcVWRojAAAAAFkUZoxrjC27qpI7kawmuwpxvdXg";
   
   public payForm = new FormGroup({
     name: this.nombre,
@@ -71,6 +75,7 @@ throw new Error('Method not implemented.');
     mestarjeta: this.mestarjeta,
     aniotarjeta: this.aniotarjeta,
     ccvtarjeta: this.ccvtarjeta,
+    recaptcha: this.recaptcha,
   });
 
   // form card
@@ -148,12 +153,15 @@ paymentForm: any;
     private Javascript:JavascriptService,
     private router: Router,
     private ActivatedRoute: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private reCaptchaV3Service: ReCaptchaV3Service
   ) { 
     Javascript.Carga(["script/credit"]),
     this.id= this.ActivatedRoute.snapshot.paramMap.get('id_suscripcion')
     //console.log("prueba ID",this.id)
+    
   }
+  
   
 
   ngOnInit(): void {
@@ -173,6 +181,8 @@ console.log('Form')
 
     return this.tabLoadTimes[index];
   }
+
+  
   
   getInfo(){
     // console.log("entro o no")

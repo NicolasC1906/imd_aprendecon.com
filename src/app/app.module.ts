@@ -61,6 +61,7 @@ import {DialogModule} from '@angular/cdk/dialog';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxCaptchaModule } from 'ngx-captcha';
 // Angular Material
 
 // Componentes
@@ -176,6 +177,7 @@ import { DialogContentPayComponent } from './pages/payment/billing/dialog-conten
     DialogModule,
     NgbModule,
     ReactiveFormsModule,
+    NgxCaptchaModule,
     FormsModule,
     
   ],
